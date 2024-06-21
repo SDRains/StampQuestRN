@@ -4,12 +4,9 @@ import {
   SafeAreaView,
   ScrollView,
   View,
-  Image,
   useColorScheme,
   FlatList,
-  ImageBackground 
 } from 'react-native';
-import images from '@/src/components/images'
 import { Text } from '@/src/components/Themed';
 import { Colors } from '@/src/constants/Colors';
 import TrendingList from "@/src/components/home/TrendingList";

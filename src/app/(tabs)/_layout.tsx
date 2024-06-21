@@ -16,6 +16,7 @@ export default function TabLayout() {
             }}>
 
             <Tabs.Screen name="index" options={{href: null}} />
+            <Tabs.Screen name="profile" options={{href: null}} />
             {/* href null makes sure /(tabs)/index does not show up in nav bar since it's simply a redirect page */}
 
             <Tabs.Screen
@@ -37,11 +38,11 @@ export default function TabLayout() {
                 }}
             />
             <Tabs.Screen
-                name="profile"
+                name="stamps"
                 options={{
-                    title: 'Profile',
+                    title: 'Stamps',
                     tabBarIcon: ({ color, focused }) => (
-                        <TabBarIcon name={focused ? 'person-circle' : 'person-circle-outline'} color={color} />
+                        <TabBarIcon name={focused ? 'ticket' : 'ticket-outline'} color={color} />
                     ),
                 }}
             />

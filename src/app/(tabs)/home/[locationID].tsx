@@ -13,8 +13,8 @@ import { Link, Stack, useLocalSearchParams } from 'expo-router';
 import { allLocationsData } from '@/src/data';
 import { Ionicons } from '@expo/vector-icons';
 import { useState } from 'react';
-import images from '@/src/components/images';
 import stamps from '@/src/components/stamps';
+import * as Location from 'expo-location';
   
   export default function LocationDetails() {
     const colorScheme = useColorScheme();
@@ -23,6 +23,18 @@ import stamps from '@/src/components/stamps';
     const [stampInRange, setStampInRange] = useState(true)
     const [stampCollected, setStampCollected] = useState(false)
 
+    async function collectStamp() {
+      let { status } = await Location.requestForegroundPermissionsAsync();
+      
+      if (status !== 'granted') {
+        alert('Permission to access location was denied');
+        return;
+      }
+
+      let location = await Location.getCurrentPositionAsync({});
+      console.log(location)
+    }
+
     if (locationID == undefined) {
       return <Text>Error! Could not find location!</Text>
     }
@@ -30,7 +42,11 @@ import stamps from '@/src/components/stamps';
     return (
       <SafeAreaView style={[styles.container, {backgroundColor: colorScheme == "dark" ? Colors.dark.background : Colors.light.background}]}>
         <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
-            <Stack.Screen options={{title: "", headerBackTitle: "Back", headerTintColor: colorScheme == "light" ? Colors.light.tint : Colors.dark.tint }} />
+            <Stack.Screen options={{title: "", headerBackTitle: "Back", headerTintColor: colorScheme == "light" ? Colors.light.tint : Colors.dark.tint, headerRight: () => (
+              <Pressable>
+                <Ionicons name="heart-outline" size={26} style={{ color: 'white' }} /> 
+              </Pressable>
+            )}} />
 
             <Image source={locationData?.image} style={styles.headerImage} />
 
@@ -63,11 +79,11 @@ import stamps from '@/src/components/stamps';
                 {locationData?.description}
               </Text>
 
-              <Pressable style={[styles.collectStampButton, {backgroundColor: Colors.light.tint }]}>
+              <Pressable style={[styles.collectStampButton, {backgroundColor: Colors.light.tint }]} onPress={collectStamp}>
                 <Text style={{ fontSize: 17, fontWeight: 600, color: 'white'}}>Collect This Stamp</Text>
               </Pressable>
 
-              <View style={{ marginVertical: 8, flexDirection: 'row', flexWrap: 'wrap', width: '100%', gap: 8 }}>
+              <View style={{ marginVertical: 12, flexDirection: 'row', flexWrap: 'wrap', width: '100%', gap: 12 }}>
                 <Pressable style={[styles.locationDetailsButton, { backgroundColor: colorScheme == 'light' ? Colors.light.contrastBackground : Colors.dark.contrastBackground }]}>
                   <Ionicons name='map-outline' size={30} style={{ color: colorScheme == 'light' ? Colors.light.text : Colors.dark.text }} />
 
@@ -84,7 +100,9 @@ import stamps from '@/src/components/stamps';
               <View style={{ marginVertical: 32, alignItems: 'center' }}>
                 <Image source={stamps.blankStamp} style={{ height: 120, width: 120, objectFit: 'cover'}} />
 
-                <Text>Stamp Not Collected Yet</Text>
+                <Text style={{ marginTop: 16 }}>
+                  Stamp Not Collected Yet
+                  </Text>
               </View>
 
             </View>

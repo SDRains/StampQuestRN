@@ -9,7 +9,9 @@ const LoginPage = () => {
 
     return (
         <View style={styles.container}>
-            <Text>Login Page</Text>
+            <Text>
+                Login Page
+            </Text>
 
             <Link href="/(tabs)/home" style={{ color: modeColors.text }}>
                 Go to home page
@@ -22,7 +24,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         paddingTop: 40,
-        paddingHorizontal: 8
+        paddingHorizontal: 8,
     }
 })
 
