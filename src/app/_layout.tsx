@@ -7,6 +7,8 @@ import { useEffect } from 'react';
 import 'react-native-reanimated';
 
 import { useColorScheme } from '@/src/components/useColorScheme';
+import {ApolloProvider} from "@apollo/client";
+import client from "@/src/graphql/setup";
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -49,12 +51,14 @@ function RootLayoutNav() {
   const colorScheme = useColorScheme();
 
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false, gestureEnabled: false }} />
-        <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
-        <Stack.Screen name="loginPage" options={{ headerShown: false, gestureEnabled: false }} />
-      </Stack>
-    </ThemeProvider>
+      <ApolloProvider client={client}>
+        <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+          <Stack>
+            <Stack.Screen name="(tabs)" options={{ headerShown: false, gestureEnabled: false }} />
+            <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
+            <Stack.Screen name="loginPage" options={{ headerShown: false, gestureEnabled: false }} />
+          </Stack>
+        </ThemeProvider>
+      </ApolloProvider>
   );
 }

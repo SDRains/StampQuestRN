@@ -3,6 +3,9 @@ const AzRoot = "@/assets/locations/Arizona/"
 const caliRoot = "@/assets/locations/California/"
 const utahRoot = "@/assets/locations/Utah/"
 
+// Generic Images
+const loginImage = require('@/assets/login_screen.png')
+
 // Arizona Images
 const grandCanyon = require(AzRoot + "grand_canyon.png")
 const sedona = require(AzRoot + "sedona_cropped.png")
@@ -21,9 +24,12 @@ const canyonlands = require(utahRoot + "canyonlands.png")
 const zion = require(utahRoot + "zion.png")
 
 export default {
+    genericImages: {
+        loginImage,
+    },
     azImages: {
         grandCanyon,
-        sedona
+        sedona,
     },
     caliImages: {
         californiaCoast,
@@ -32,10 +38,10 @@ export default {
         redwoodNP,
         santaMonicaPier,
         sequoiaNP,
-        yosemiteNationalPark
+        yosemiteNationalPark,
     },
     utahImages: {
         canyonlands,
-        zion
+        zion,
     }
 }
