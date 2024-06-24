@@ -34,7 +34,7 @@ export default function TrendingList(props: PageProps) {
                     </View>
                 </View>
 
-                <Ionicons name="chevron-forward" size={24} style={{ color: 'gray' }} /> 
+                <Ionicons name="chevron-forward" size={20} style={{ color: 'gray' }} />
             </Pressable>
         </Link>
     )
@@ -44,7 +44,9 @@ const styles = StyleSheet.create({
     trendingRow: {
         width: "100%",
         paddingVertical: 16,
-        paddingHorizontal: 12,
+        //paddingHorizontal: 12,
+        marginLeft: 12,
+        paddingRight: 24,
         flexDirection: "row",
         alignItems: "center",
         justifyContent: 'space-between',

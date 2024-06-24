@@ -3,28 +3,37 @@ import {
     Image, Keyboard,
     KeyboardAvoidingView,
     Platform,
-    Pressable, StyleSheet, Switch,
+    Pressable,
+    StyleSheet, Switch,
     TextInput, TouchableWithoutFeedback,
     useColorScheme
 } from "react-native";
 import {Colors} from "@/src/constants/Colors"
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import {Dimensions} from "react-native";
 import locImages from '@/src/components/images'
 import {Link, useRouter} from "expo-router";
 import { StatusBar } from "expo-status-bar";
 
-const LoginPage = () => {
+const SignupPage = () => {
     const router = useRouter()
     const colorScheme = useColorScheme()
     const modeColors = colorScheme == "light" ? Colors.light : Colors.dark
+    const [fnameText, setFnameText] = useState('')
+    const [lnameText, setLnameText] = useState('')
     const [usernameText, setUsernameText] = useState('')
     const [passwordText, setPasswordText] = useState('')
-    const [rememberLogin, setRememberLogin] = useState(true)
 
-    const backgroundImgSrc = "/assets/light_mountain_illustration.png"
     const windowWidth = Dimensions.get('window').width;
     const windowHeight = Dimensions.get('window').height;
+
+    const handleFnameChange = (input: string) => {
+        setFnameText(input)
+    }
+
+    const handleLnameChange = (input: string) => {
+        setLnameText(input)
+    }
 
     const handleUsernameChange = (input: string) => {
         setUsernameText(input);
@@ -34,8 +43,8 @@ const LoginPage = () => {
         setPasswordText(input);
     }
 
-    const handleLoginSubmit = () => {
-        router.push('/(tabs)/home')
+    const handleSignupButton = () => {
+        alert('Sign Up')
     }
 
     return (
@@ -58,8 +67,40 @@ const LoginPage = () => {
                         />
 
                         <Text style={styles.headerText}>
-                            Log Into Your Account
+                            Create an Account
                         </Text>
+
+                        <View style={{ flexDirection: 'row', justifyContent: 'space-between', gap: 12, backgroundColor: 'rgba(0,0,0,0.0)' }}>
+                            <View style={{ flex: 1, backgroundColor: 'rgba(0,0,0,0.0)' }}>
+                                <Text style={styles.textInputHeaderText}>
+                                    First Name
+                                </Text>
+
+                                <TextInput
+                                    style={[styles.textInput, {marginBottom: 20}]}
+                                    onChangeText={handleFnameChange}
+                                    value={fnameText}
+                                    placeholder="First Name"
+                                    autoCorrect={false}
+                                    autoCapitalize="words"
+                                />
+                            </View>
+
+                            <View style={{ flex: 1, backgroundColor: 'rgba(0,0,0,0.0)' }}>
+                                <Text style={styles.textInputHeaderText}>
+                                    Last Name
+                                </Text>
+
+                                <TextInput
+                                    style={[styles.textInput, {marginBottom: 20}]}
+                                    onChangeText={handleLnameChange}
+                                    value={lnameText}
+                                    placeholder="Last Name"
+                                    autoCorrect={false}
+                                    autoCapitalize="words"
+                                />
+                            </View>
+                        </View>
 
                         <Text style={styles.textInputHeaderText}>
                             Username
@@ -88,33 +129,17 @@ const LoginPage = () => {
                             secureTextEntry={true}
                         />
 
-                        <View style={styles.rememberContainer}>
-                            <Text style={styles.textInputHeaderText}>
-                                Remember Login?
-                            </Text>
-                            <Switch
-                                onValueChange={() => setRememberLogin(!rememberLogin)}
-                                value={rememberLogin}
-                            />
-                        </View>
-
                         <Pressable
-                            style={styles.loginButton}
-                            onPress={handleLoginSubmit}
+                            style={styles.signupButton}
+                            onPress={handleSignupButton}
                         >
-                            <Text style={styles.loginButtonText}>
-                                Login
+                            <Text style={styles.signupButtonText}>
+                                Sign Up
                             </Text>
                         </Pressable>
 
-                        <Pressable style={{ width: '100%', marginTop: 8 }}>
-                            <Text style={{ textAlign: 'center', fontSize: 15, fontWeight: 600, color: 'white' }}>
-                                Forgot password?
-                            </Text>
-                        </Pressable>
-
-                        <Link style={{ marginTop: 24, textAlign: 'center'}} href='/signupPage'>
-                            <Text style={{ fontSize: 17, color: 'white' }}>Don't have an account? <Text style={{fontWeight: 700, color: 'white'}}>Sign Up</Text></Text>
+                        <Link style={{ marginTop: 24, textAlign: 'center'}} href='/loginPage'>
+                            <Text style={{ fontSize: 17, color: 'white' }}>Already have an account? <Text style={{fontWeight: 700, color: 'white'}}>Log In</Text></Text>
                         </Link>
                     </View>
                 </View>
@@ -162,19 +187,13 @@ const styles = StyleSheet.create({
         color: '#e3e3e3',
         fontSize: 16,
     },
-    rememberContainer: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        marginBottom: 16,
-        backgroundColor: 'rgba(0, 0, 0, 0.0)', // Set view to transparent
-    },
-    loginButton: {
+    signupButton: {
         backgroundColor: 'white',
         width: '100%',
-        borderRadius: 5
+        borderRadius: 5,
+        marginTop: 4
     },
-    loginButtonText: {
+    signupButtonText: {
         textAlign: 'center',
         color: 'black',
         padding: 10,
@@ -192,4 +211,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default LoginPage
+export default SignupPage

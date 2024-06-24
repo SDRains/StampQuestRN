@@ -5,6 +5,8 @@ const utahRoot = "@/assets/locations/Utah/"
 
 // Generic Images
 const loginImage = require('@/assets/login_screen.png')
+const logoLight = require('@/assets/logos/stampquest_logo_light.png')
+const logoDark = require('@/assets/logos/stampquest_logo_dark.png')
 
 // Arizona Images
 const grandCanyon = require(AzRoot + "grand_canyon.png")
@@ -26,6 +28,8 @@ const zion = require(utahRoot + "zion.png")
 export default {
     genericImages: {
         loginImage,
+        logoLight,
+        logoDark
     },
     azImages: {
         grandCanyon,

@@ -1,12 +1,23 @@
-import { ApolloClient, InMemoryCache, ApolloProvider, HttpLink } from '@apollo/client';
+import {ApolloClient, createHttpLink, InMemoryCache} from "@apollo/client";
+import { setContext } from '@apollo/client/link/context';
 
-const httpLink = new HttpLink({
-    uri: 'https://emerging-marmot-22.hasura.app/v1/graphql', // replace with your GraphQL endpoint
+const authLink = setContext((_, { headers }) => {
+    return {
+        headers: {
+            ...headers, 'x-hasura-admin-secret': 'ja6MRbPHZpElgmyy1LKis1gbS35WFRoJ2vxTssV0GkAWdyDi3dyadblRp3MPv8Fg'
+        }
+    }
 });
 
+
+const httpLink = createHttpLink({
+    uri: 'https://emerging-marmot-22.hasura.app/v1/graphql',
+});
+
+
 const client = new ApolloClient({
-    link: httpLink,
+    link: authLink.concat(httpLink),
     cache: new InMemoryCache(),
 });
 
-export default client;
+export default client

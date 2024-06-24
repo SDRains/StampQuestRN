@@ -38,7 +38,7 @@ export default function TabOneScreen() {
               style={{
                 margin: 12,
                 backgroundColor: colorScheme == "light" ? Colors.light.contrastBackground : Colors.dark.contrastBackground,
-                borderRadius: 4
+                borderRadius: 10
               }}
               data={trendingLocations}
               showsHorizontalScrollIndicator={false}

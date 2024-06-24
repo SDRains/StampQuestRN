@@ -26,7 +26,6 @@ export default function TabOneScreen() {
           <Text style={[styles.subtitle]}>
             Expeditions
           </Text>
-
         </View>
 
         <View style={{margin: 12}}>
